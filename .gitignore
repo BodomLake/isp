@@ -1,2 +1,7 @@
 # Project exclude paths
 /server/node_modules/
+/web/node_modules
+.idea
+.vscode
+/web/dist
+/web/build
