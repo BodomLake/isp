@@ -1,12 +1,12 @@
 <template>
-  <a-layout id="a-layout">
+  <a-layout id="home-layout">
     <a-page-header style="text-align: center">
       <router-link to="/">
-        <strong style="font-size: 22px; line-height: 100%">个人工具中心</strong>
+        <strong class="app-title">个人工具中心</strong>
       </router-link>
     </a-page-header>
 
-    <a-layout-content>
+    <div>
       <transition name="fade">
         <!--  要被缓存的 -->
         <keep-alive>
@@ -20,61 +20,137 @@
       </transition>
       <!-- Home主界面 -->
       <transition name="main-fade">
-        <a-layout-content id="layout-content" v-if="this.$route.path === '/'">
-          <a-row :gutter="[0, 2]">
-            <a-col :span="12">
+        <div id="layout-content" v-if="this.$route.path === '/'">
+          <a-row :gutter="[6, 12]" type="flex" justify="center" align="middle">
+            <a-col :span="3">
               <div class="match" @click="goto('match')">
                 <img
+                  height="200px"
+                  width="200px"
                   alt="Vue logo"
-                  src="../assets/banner/ths1.png"
+                  src="../assets/app/Finance.jpg"
                   title="财报匹配"
                 />
-                <!--              <router-link exact to="match">
-                                  <a-button>财报匹配</a-button>
-                </router-link>-->
               </div>
             </a-col>
-            <a-col :span="12">
+            <a-col :span="3">
               <div @click="goto('table')">
                 <img
                   alt="Vue logo"
-                  src="../assets/banner/ths2.png"
+                  src="../assets/app/THS.jpg"
                   title="财报查询"
                 />
-                <!--<router-link exact to="table">财报查询</router-link>-->
               </div>
             </a-col>
-          </a-row>
-          <a-row :gutter="[0, 2]">
-            <a-col :span="12">
-              <div>
-                <!--<router-link exact to="tool">编码/解码</router-link>-->
+            <a-col :span="3">
+              <div @click="goto('game')">
                 <img
                   alt="Vue logo"
-                  src="../assets/banner/ths3.png"
+                  src="../assets/app/Game.jpg"
+                  title="游戏盒"
+                />
+              </div>
+            </a-col>
+            <a-col :span="3">
+              <div>
+                <img
+                  alt="Vue logo"
+                  src="../assets/app/Stock.jpg"
                   @click="goto('tool')"
                   title="小工具库"
                 />
               </div>
             </a-col>
-            <a-col :span="12">
+          </a-row>
+          <a-row :gutter="[6, 12]" type="flex" justify="center" align="middle">
+            <a-col :span="3">
               <div>
-                <!--<router-link exact to="editor">财报查询</router-link>-->
                 <img
                   alt="Vue logo"
-                  src="../assets/banner/ths4.png"
-                  @click="goto('editor')"
-                  title="编辑器"
+                  src="../assets/app/Tools.jpg"
+                  @click="goto('tool')"
+                  title="小工具库"
+                />
+              </div>
+            </a-col>
+            <a-col :span="3">
+              <div>
+                <img
+                  alt="Vue logo"
+                  src="../assets/app/WeChat.jpg"
+                  @click="goto('chat')"
+                  title="聊天室"
+                />
+              </div>
+            </a-col>
+            <a-col :span="3">
+              <div>
+                <img
+                  alt="Vue logo"
+                  src="../assets/app/MP3.jpg"
+                  @click="goto('music')"
+                  title="MP3"
+                />
+              </div>
+            </a-col>
+            <a-col :span="3">
+              <div>
+                <img
+                  alt="Vue logo"
+                  src="../assets/app/MP4.jpg"
+                  @click="goto('video')"
+                  title="MP4"
                 />
               </div>
             </a-col>
           </a-row>
-        </a-layout-content>
+          <a-row :gutter="[6, 12]" type="flex" justify="center" align="middle">
+            <a-col :span="3">
+              <div @click="goto('email')">
+                <img
+                  alt="Vue logo"
+                  src="../assets/app/Email.jpg"
+                  title="邮箱"
+                />
+              </div>
+            </a-col>
+            <a-col :span="3">
+              <div>
+                <img
+                  alt="Vue logo"
+                  src="../assets/app/Blog.jpg"
+                  @click="goto('blog')"
+                  title="聊天室"
+                />
+              </div>
+            </a-col>
+            <a-col :span="3">
+              <div>
+                <img
+                  alt="Vue logo"
+                  src="../assets/app/AppStore.jpg"
+                  @click="goto('music')"
+                  title="MP3"
+                />
+              </div>
+            </a-col>
+            <a-col :span="3">
+              <div>
+                <img
+                  alt="Vue logo"
+                  src="../assets/app/iOS.jpg"
+                  @click="goto('video')"
+                  title="MP4"
+                />
+              </div>
+            </a-col>
+          </a-row>
+        </div>
       </transition>
-    </a-layout-content>
+    </div>
 
-    <a-layout-footer id="layout-footer">
-      <div class="footer">
+    <div id="layout-footer">
+      <div class="aboutAuthor">
         <my-icon className="icon-User" />
         <a href="javascript:void(0)" title="792294021@qq.com">作者:RHX</a>
         <my-icon className="icon-github" />
@@ -86,21 +162,15 @@
           >GitHub2:RyougiMana</a
         >
       </div>
-    </a-layout-footer>
+    </div>
   </a-layout>
 </template>
 
 <script>
-import Match from "./Match";
-import Tool from "./Tool";
-import Table from "./Table";
-import Editor from "./Editor";
-import Chat from "./Chat";
-import MyIcon from "../components/MyIcon";
-//
+// import Chat from "./Chat";
 export default {
   name: "Home",
-  components: { Match, Tool, Table, Editor, Chat, MyIcon },
+  // components: { Match, Tool, Table, Editor, Chat },
   data() {
     return {
       msg: "Welcome to Your Vue.js App"
@@ -122,8 +192,15 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-#a-layout {
+.app-title {
+  font-size: 22px;
+  line-height: 100%;
+}
+#home-layout {
   height: 100%;
+  overflow-y: auto;
+  overflow-x: hidden;
+  width: 100%;
 }
 
 a-page-header {
@@ -134,7 +211,7 @@ a-page-header {
 }
 
 .ant-layout-content {
-  height: 86%;
+  height: 80%;
 }
 
 #layout-content [class~="ant-col"] {
@@ -144,19 +221,24 @@ a-page-header {
 }
 
 #layout-content [class~="ant-col"] > div {
-  background: #93c9e8;
+  /* 93c9e8 */
+  background: white;
   align-content: stretch;
   /*height: 50%;*/
   /* line-height: 350px; */
   font-size: 14px;
-  border: 2px solid rgb(235, 237, 240);
+  border: 1px solid rgb(235, 237, 240);
 }
 
-/* #layout-footer {
+#layout-footer {
+  height: 100%;
+  width: 100%;
+}
+.aboutAuthor {
+  right: 0px;
   bottom: 0px;
-} */
-#layout-footer .footer {
-  float: right;
+  position: absolute;
+  margin: 0px 20px 5px 0px;
 }
 
 img {

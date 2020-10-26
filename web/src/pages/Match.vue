@@ -125,7 +125,7 @@ import {
   postRequest,
   getRequest
 } from "../utils/api";
-import MyIcon from "../components/MyIcon";
+
 /*
   let reportTypeData = [
     "主要指标",
@@ -169,16 +169,13 @@ const marketTypes = [{
 const plainOptions = ["沪市", "深市"];
 const defaultCheckedList = ["沪市", "深市"];
 export default {
-  components: {
-    MyIcon
-  },
   name: "Match",
   // 创建vue子实例的时候，获取要用来渲染<template>的指标，年份等等数据
   beforeCreate() {
     // 默认加载浦发银行的所有指标
     // 获取document.tables[0:4] 五个表，name:'报表名称', indicators:['?','??','???']
     getRequest("/match/loadIndicators").then((res) => {
-      this.$message.success("各项指标加载完毕");
+      
       let result = JSON.parse(JSON.stringify(res.data));
       // 处理每一张表的各个指标
       Array.from(result[0].tables).forEach((item, index) => {
@@ -223,6 +220,9 @@ export default {
       });
       this.indicatorNames = this.indicatorNameData[0];
       this.indicatorName = this.indicatorNameData[0][0];
+      this.$message.success("各项指标加载完毕");
+    }).catch((err)=>{
+      
     });
     for (let i = 2020; i >= 1999; i--) {
       years.push(i.toString());

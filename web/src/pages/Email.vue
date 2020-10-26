@@ -1,4 +1,4 @@
-<!-- 登录页面 -->
+<!-- 视频页面 -->
 <template>
   <div>
 
@@ -7,7 +7,7 @@
 
 <script>
   export default {
-    name:'Login'
+    
   }
 </script>
 
