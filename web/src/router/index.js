@@ -6,7 +6,12 @@ import Editor from "@/pages/Editor";
 import Table from "@/pages/Table";
 import Match from "@/pages/Match";
 import Chat from "@/pages/Chat";
-import Login from "@/pages/Login";
+import LoginPage from "@/pages/LoginPage";
+import Register from "@/pages/Register";
+import Email from "@/pages/Email";
+import Video from "@/pages/Video";
+import Music from "@/pages/Music";
+import Blog from "@/pages/Blog";
 Vue.use(Router);
 const router = new Router({
   mode: "history",
@@ -14,44 +19,72 @@ const router = new Router({
     {
       path: "/",
       name: "Home",
-      component: Home,
-      children: [
-        {
-          path: "match",
-          name: "Match",
-          component: Match,
-          meta: { keepAlive: true }
-        },
-        {
-          path: "table",
-          name: "Table",
-          component: Table,
-          meta: { keepAlive: true }
-        },
-        {
-          path: "tool",
-          name: "Tool",
-          component: Tool,
-          meta: { keepAlive: true }
-        },
-        {
-          path: "editor",
-          name: "Editor",
-          component: Editor,
-          meta: { keepAlive: true }
-        },
-        {
-          path: "chat",
-          name: "Chat",
-          component: Chat,
-          meta: { keepAlive: true }
-        }
-      ]
+      component: Home
     },
     {
-      path: "login",
-      name: "Login",
-      component: Login,
+      path: "/register",
+      name: "Register",
+      component: Register,
+      meta: { keepAlive: true }
+    },
+    {
+      path: "/login",
+      name: "LoginPage",
+      component: LoginPage,
+      meta: { keepAlive: true }
+    },
+    {
+      path: "/match",
+      name: "Match",
+      component: Match,
+      meta: { keepAlive: true }
+    },
+    {
+      path: "/table",
+      name: "Table",
+      component: Table,
+      meta: { keepAlive: true }
+    },
+    {
+      path: "/tool",
+      name: "Tool",
+      component: Tool,
+      meta: { keepAlive: true }
+    },
+    {
+      path: "/editor",
+      name: "Editor",
+      component: Editor,
+      meta: { keepAlive: true }
+    },
+    {
+      path: "/chat",
+      name: "Chat",
+      component: Chat,
+      meta: { keepAlive: true }
+    },
+    {
+      path: "/email",
+      name: "Email",
+      component: Email,
+      meta: { keepAlive: true }
+    },
+    {
+      path: "/video",
+      name: "Video",
+      component: Video,
+      meta: { keepAlive: true }
+    },
+    {
+      path: "/music",
+      name: "Music",
+      component: Music,
+      meta: { keepAlive: true }
+    },
+    {
+      path: "/blog",
+      name: "Blog",
+      component: Music,
       meta: { keepAlive: true }
     }
   ]
