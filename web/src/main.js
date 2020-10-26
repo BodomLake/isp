@@ -30,8 +30,18 @@ Vue.use(ant);
 // import VueHighcharts from 'highcharts'
 import HighchartsVue from "highcharts-vue";
 Vue.use(HighchartsVue);
+import MyIcon from "./components/MyIcon";
+import DragVerify from "./components/DragVerify";
+import mavonEditor from "mavon-editor";
+import "mavon-editor/dist/css/index.css";
+// import ResSplitPane from "vue-resize-split-pane";
+
+Vue.component("my-icon", MyIcon);
+Vue.component("dragVerify", DragVerify);
+Vue.use(mavonEditor);
+// Vue.component("rs-panes", ResSplitPane);
 /* eslint-disable no-new */
-new Vue({
+export default new Vue({
   el: "#app",
   router,
   store,
