@@ -22,7 +22,8 @@
     "mongoose": "^5.10.5",
     "morgan": "~1.9.1",
     "mysql2": "^2.1.0",
-    "sequelize": "^6.3.4"
+    "sequelize": "^6.3.4",
+    "socket.io": "^2.3.0"
   },
   "devDependencies": {
     "node-dev": "^5.0.0"

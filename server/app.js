@@ -3,13 +3,15 @@ var path = require("path");
 var cookieParser = require("cookie-parser");
 var logger = require("morgan");
 var bodyParser = require("body-parser");
+// session管理器
 var session = require("express-session");
 
+// 导出各个路由
 var indexRouter = require("./routes/index");
 var usersRouter = require("./routes/users");
 var matchRouter = require("./routes/match");
 var tableRouter = require("./routes/table");
-
+var loginRouter = require("./routes/login");
 var app = express();
 
 app.set("trust proxy", 1);
@@ -20,9 +22,10 @@ app.use(
 		saveUninitialized: true,
 	})
 );
+
 // 设置跨域访问
 // /*
-app.all("*", function ( req, res, next) {
+app.all("*", function (req, res, next) {
 	//设置允许跨域的域名，*代表允许任意域名跨域
 	res.header("Access-Control-Allow-Origin", "http://localhost:3001");
 	//带上cookie
@@ -32,8 +35,9 @@ app.all("*", function ( req, res, next) {
 	//跨域允许的请求方式
 	res.header("Access-Control-Allow-Methods", "DELETE,PUT,POST,GET,OPTIONS");
 	//让options尝试请求快速结束
-	if (req.method.toLowerCase() == "options") { 
-		res.send(200); next();
+	if (req.method.toLowerCase() == "options") {
+		res.send(200);
+		next();
 	}
 
 	// 登录 登出 注册 不需要 登录后的权限
@@ -41,22 +45,20 @@ app.all("*", function ( req, res, next) {
 		next();
 	}
 	// 如果登录了，就放行
-	if (req.session.login) {
+	if (!req.session.login) {
 		next();
 	} else {
 		let resObj = {
-			code: 304,
+			code: 403,
 			msg: "未登录",
 		};
-		res.send(resObj);
+		res.sendStatus(403);
 		// 就此为止，不再res.send()
 		// next();
 	}
 });
 // 设置需要 登录权限的接口
-app.all("*", function (req, res, next) {
-
-});
+app.all("*", function (req, res, next) {});
 // */
 
 // 设置模板存放的目录
@@ -89,19 +91,24 @@ app.use(express.static(path.join(__dirname, "public")));
 
 // 连接mongodb，并且从模块导出给各级应用
 var connection = require("./db/stock/stock");
+const { ws } = require("./routes/index");
 
 // 配置路由
 app.use("/", indexRouter);
 app.use("/users", usersRouter);
 app.use("/match", matchRouter);
 app.use("/table", tableRouter);
+app.use("/login", loginRouter);
 
 // 获取express-websocket 服务器
+// expressWs方法将app对象传入
 var expressWS = require("express-ws")(app);
 // 加载ws路由，必须在启动express-websocket 服务器之后
-var chatRouter = require("./routes/chat");
+var wsRouter = require("./routes/ws");
 // 给ws通讯定义路由 （works with routers）
-app.use("/chat", chatRouter);
+app.use("/ws", wsRouter);
+// 8080端口 设置为 websocket专用端口
+app.listen(8080)
 
 // catch 404 and forward to error handler
 // 404捕捉与错误导向页面
