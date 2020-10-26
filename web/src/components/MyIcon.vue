@@ -7,7 +7,7 @@
   </div>
 </template>
 <script>
-const src = "//at.alicdn.com/t/font_2101883_lrgdqfcvat.js";
+const src = "//at.alicdn.com/t/font_2101883_1lrsfimqv03.js";
 export default {
   name: "my-icon",
   components: {
