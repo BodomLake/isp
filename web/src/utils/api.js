@@ -1,20 +1,29 @@
 import axios from "axios";
-
+import Vue from "../main";
 let base = "api";
 
 axios.defaults.withCredentials = true;
 axios.defaults.crossDomain = true;
 axios.defaults.headers.post["Content-Type"] =
   "application/x-www-form-urlencoded";
-axios.interceptors.request.use(
-  function(response) {
-    return response;
-  },
-  function(error) {
-    //敏感接口.如果没有session跳转登录界面
-    if (error.response.status == 403) {
-      router.push({ name: "login" });
+
+// 拦截axios请求从服务器得到的响应
+axios.interceptors.response.use(
+  resp => {
+    console.log(resp);
+    if (resp.status === 403) {
+      console.log(resp);
+      Vue.$router.push({ path: "/login" });
     }
+    return resp;
+  },
+  (error) => {
+    //敏感接口.如果没有session跳转登录界面
+    // console.log(error)
+    if (error.response.status === 403) {
+      Vue.$router.push({ path: "/login" });
+    }
+    return Promise.reject(error);
   }
 );
 
@@ -29,6 +38,7 @@ export const postRequest = (url, params) => {
     inter
   });
 };
+
 export const uploadFileRequest = (url, params) => {
   return axios({
     method: "post",
@@ -39,6 +49,7 @@ export const uploadFileRequest = (url, params) => {
     }
   });
 };
+
 export const putRequest = (url, params) => {
   return axios({
     method: "put",
@@ -59,12 +70,14 @@ export const putRequest = (url, params) => {
     }
   });
 };
+
 export const deleteRequest = url => {
   return axios({
     method: "delete",
     url: `${base}${url}`
   });
 };
+
 export const getRequest = (url, params) => {
   return axios({
     method: "get",
